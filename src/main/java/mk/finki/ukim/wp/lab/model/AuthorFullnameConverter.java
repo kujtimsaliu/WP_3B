@@ -22,5 +22,7 @@ public class AuthorFullnameConverter implements AttributeConverter<AuthorFullnam
         }
         String[] parts = dbData.split(" ");
         return new AuthorFullname(parts[0], parts[1]);
+
     }
+
 }

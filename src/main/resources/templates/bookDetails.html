@@ -199,7 +199,7 @@
     <div class="authors-list">
         <h2>Authors</h2>
         <ul th:each="author : ${authors}">
-            <li th:text="${author.getName()}"></li>
+            <li th:text="${author.getAuthorFullname().getName()}"></li>
         </ul>
         <a th:href="@{'/author/add-author/{id}' (id=${selectedBook.getId()})}" class="add-author-button">Add Author</a>
 <!--        <form  th:action="@{'/author/remove-authors/{id}' (id=${selectedBook.getId()})}" th:method="DELETE">-->

@@ -14,20 +14,22 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name = "author_name")
-    String name;
+    @Convert(converter = AuthorFullnameConverter.class)
+    AuthorFullname authorFullname;
 
-    String surname;
+//    @Column(name = "author_name")
+//    String name;
+//
+//    String surname;
 
     String biography;
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate dateOfBirth;
 
-    public Author(String name, String surname, String biography, LocalDate dateOfBirth) {
+    public Author(AuthorFullname authorFullname, String biography, LocalDate dateOfBirth) {
 //        this.id = id;
-        this.name = name;
-        this.surname = surname;
+        this.authorFullname=authorFullname;
         this.biography = biography;
         this.dateOfBirth=dateOfBirth;
     }
@@ -43,21 +45,7 @@ public class Author {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
 
     public String getBiography() {
         return biography;

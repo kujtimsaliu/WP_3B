@@ -33,6 +33,9 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public void save(String name, String surname, String biography, LocalDate dateOfBirth) {
         AuthorFullname authorFullname = new AuthorFullname(name, surname);
-        authorRepository.save(new Author(name,surname
-                , biography, dateOfBirth));    }
+        authorRepository.save(new Author(authorFullname, biography, dateOfBirth));
+    }
+
+
+
 }
