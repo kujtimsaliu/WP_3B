@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BookStores</title>
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+          integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+
+<header class="mb-5">
+    <h1 class="text-center">BookStores</h1>
+</header>
+
+<div class="container mb-5">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Bookstore Name</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Address</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="b : ${bookstore}">
+                    <td>
+                        <a class="btn btn-light" th:href="@{'/bookstore/details/{id}' (id=${b.getId()})}">
+                            <i class="fa fa-eye"></i> View
+                        </a>
+                    </td>
+                    <td th:text="${b.getName()}"></td>
+                    <td th:text="${b.getCity()}"></td>
+                    <td th:text="${b.getAddress()}"></td>
+                    <td class="text-right">
+                        <form th:action="@{'/bookstore/delete/{id}' (id=${b.getId()})}"
+                              th:method="delete">
+                            <!--                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash">Delete</i></button>-->
+                            <button type="submit" class="btn btn-labeled btn-danger">
+                                <span class="btn-label"><i class="fa fa-trash"></i></span>Delete
+                            </button>
+                        </form>
+                        <a class="btn btn-info" th:href="@{'/bookstore/edit/{id}' (id=${b.getId()})}"><i class="fa">Edit</i></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col mb-3">
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <a href="/bookstore/add-bookstore-form" class="btn btn-dark btn-block">Add New Bookstore</a>
+                </div>
+            </div>
+            <div style="color:red; padding-top:20px" th:if="${hasError}">
+                <th:block th:text="${error}"></th:block>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center" style="margin:50px;">
+    <a href="/books" class="btn btn-secondary">Go to Books List</a>
+</div>
+
+</body>
+</html>

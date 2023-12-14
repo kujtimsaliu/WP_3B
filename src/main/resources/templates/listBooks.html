@@ -1,0 +1,202 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Books Homepage - Welcome to My Book Store</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<style>
+    .star-rating {
+        display: inline-block;
+        font-size: 24px;
+        color: #cbb01b; /* Gold color for stars */
+        text-decoration: none;
+    }
+
+    .star-rating:hover {
+        color: #ffcc00; /* Change color on hover */
+        text-decoration: none;
+    }
+    li {
+        margin-left: -40px;
+        list-style: none;
+    }
+    .btn-label {
+        position: relative;
+        left: -12px;
+        display: inline-block;
+        padding: 6px 12px;
+        background: rgba(0, 0, 0, 0.15);
+        border-radius: 3px 0 0 3px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    td {
+        /*text-align: center;*/
+        vertical-align: center;
+    }
+    .btn-labeled {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .btn {
+        /*margin-bottom: 10px;*/
+    }
+</style>
+<body>
+    <header class="mb-5">
+        <h1>Welcome to My Book Store</h1>
+    </header>
+    <main>
+
+        <header class="mb-5">
+            <h1>Books:</h1>
+        </header>
+
+
+
+    <div class="container mb-5">
+        <div class="row">
+<!--            <div class="col-12" th:if="${books.size()>0}">-->
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Bookstore name</th>
+                            <th scope="col">ISBN</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Author/s</th>
+                            <th scope="col">Genre</th>
+                            <th scope="col">Year</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <div th:if="${books.size()>0}">
+
+                            <tr th:each="b : ${books}">
+                                <td>
+                                    <a class="btn  btn-light" th:href="@{'/book-details/book/{id}' (id=${b.getId()})}"><i class="fa">View</i></a>
+                                </td>
+<!--                                <td th:text="${b.getBookStores()}"></td>-->
+                                <td>
+                                    <span th:each="bookStore : ${b.getBookStores()}">
+                                        <span th:text="${bookStore.name}"></span> <!-- Assuming 'name' is the property you want to display -->
+                                        <br/>
+                                    </span>
+                                </td>
+                                <td th:text="${b.getIsbn()}"></td>
+                                <td th:text="${b.getTitle()}"></td>
+                                <td>
+                                    <ul>
+                                        <li th:each="a : ${b.getAuthors()}">
+<!--                                            <p th:text="${a.getName()} + ' ' + ${a.getSurname()} + ','"></p>-->
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td th:text="${b.getGenre()}"></td>
+                                <td th:text="${b.getYear()}"></td>
+                                <td>
+                                    <a th:href="@{'/reviews/add-review/' + ${b.getId()}}" class="star-rating">☆☆☆☆☆</a>
+                                </td>
+                                <td class="text-right">
+                                    <form th:action="@{'/books/delete/{id}' (id=${b.getId()})}"
+                                          th:method="delete">
+<!--                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash">Delete</i></button>-->
+                                        <button type="submit" class="btn btn-labeled btn-danger">
+                                            <span class="btn-label"><i class="fa fa-trash"></i></span>Delete
+                                        </button>
+                                    </form>
+                                    <a class="btn btn-info" th:href="@{'/books/edit/{id}' (id=${b.getId()})}"><i class="fa">Edit</i></a>
+                                </td>
+                            </tr>
+                        </div>
+                        </tbody>
+
+                    </table>
+                </div>
+<!--            </div>-->
+            <div class="col mb-3">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <a href="/books/add-form" class="btn btn-block btn-dark">Add new book!</a>
+                    </div>
+                </div>
+                <div  style="color:red;padding-top:20px" th:if="${hasError}">
+                    <th:block th:text="${error}"></th:block>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div style="margin:40px;">
+    <a href="/bookstore">Go to bookstore</a>
+</div>
+
+
+    <!--    <h2>Choose book:</h2>-->
+<!--    &lt;!&ndash; Display radio buttons for each book,-->
+<!--            the value should be the isbn-->
+<!--            and the displayed text should be Title: <bookTitle>, Genre:<genre>, Year: <year> &ndash;&gt;-->
+<!--    <form th:method="POST" th:action="@{/listBooks}">-->
+<!--        <ul>-->
+<!--            <li th:each="book : ${books}">-->
+<!--                <th:block>-->
+<!--                    <input type="radio" name="bookIsbn" th:value="${book.isbn}" th:text="${'Title: ' + book.title + ', Genre: ' + book.genre + ', Year: ' + book.year}">-->
+
+<!--                </th:block></li>-->
+<!--        </ul>-->
+
+
+<!--        <input type='submit' value='Submit'>-->
+<!--    </form>-->
+
+<!--    <h2>Choose book:</h2>-->
+    <!-- Display radio buttons for each book,
+            the value should be the isbn
+
+
+            and the displayed text should be Title: <bookTitle>, Genre:<genre>, Year: <year> -->
+
+<!--    <form th:action="@{/listBooks}" th:method="POST">-->
+<!--        <ul>-->
+
+<!--            <th:block th:if="${booksByKeyword!=null}">-->
+<!--                <li th:each="book : ${booksByKeyword}">-->
+<!--                    <input type="radio" name="bookIsbn" th:value="${book.getIsbn()}" th:text="${'Title: ' + book.getTitle() + ', Genre: ' + book.getGenre() + ', Year: ' + book.getYear()}" />-->
+<!--                </li>-->
+<!--            </th:block>-->
+
+<!--            <th:block th:if="${booksByKeyword==null}">-->
+<!--                <li th:each="book : ${books}">-->
+<!--                    <input type="radio" name="bookIsbn" th:value="${book.getIsbn()}" th:text="${'Title: ' + book.getTitle() + ', Genre: ' + book.getGenre() + ', Year: ' + book.getYear()}" />-->
+<!--                </li>-->
+<!--            </th:block>-->
+
+
+<!--        </ul>-->
+
+<!--        <input type='submit' value='Submit'>-->
+<!--    </form>-->
+    </main>
+</body>
+</html>

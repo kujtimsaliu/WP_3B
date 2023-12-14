@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <style>
+       .button-60 {
+           align-items: center;
+           appearance: none;
+           background-color: #fff;
+           border: 1px solid #dbdbdb;
+           border-radius: .375em;
+           box-shadow: none;
+           box-sizing: border-box;
+           color: #363636;
+           cursor: pointer;
+           display: inline-flex;
+           font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+           font-size: 1rem;
+           height: 2.5em;
+           justify-content: center;
+           line-height: 1.5;
+           padding: calc(.5em - 1px) 1em;
+           position: relative;
+           text-align: center;
+           user-select: none;
+           -webkit-user-select: none;
+           touch-action: manipulation;
+           vertical-align: top;
+           white-space: nowrap;
+       }
+
+        .button-60:active {
+            border-color: #4a4a4a;
+            outline: 0;
+        }
+
+        .button-60:focus {
+            border-color: #485fc7;
+            outline: 0;
+        }
+
+        .button-60:hover {
+            border-color: #b5b5b5;
+        }
+
+        .button-60:focus:not(:active) {
+            box-shadow: rgba(72, 95, 199, .25) 0 0 0 .125em;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .book-details {
+            max-width: 600px;
+            margin: auto;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .authors-list {
+            margin-top: 10px;
+        }
+
+        .authors-list li {
+            margin-bottom: 5px;
+        }
+
+        .bookstore-info {
+            margin-top: 20px;
+        }
+
+        .bookstore-info h2 {
+            margin-bottom: 10px;
+        }
+        .back-button {
+            display: block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .back-button:hover {
+            background-color: #45a049;
+        }
+        .add-author-button {
+            display: block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .add-author-button:hover {
+            background-color: #0056b3;
+        }
+        btn-label {
+            position: relative;
+            left: -12px;
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 3px 0 0 3px;
+            padding: 10px 20px 10px 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            /*text-align: center;*/
+            vertical-align: center;
+        }
+        .btn-labeled {
+            /*padding-top: 10px;*/
+            /*padding-bottom: 10px;*/
+            padding: 10px 20px 10px 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="book-details">
+    <h1>Book Details</h1>
+
+    <table>
+
+        <tr>
+            <th>ISBN</th>
+            <td th:text="${selectedBook.getIsbn()}"></td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td th:text="${selectedBook.getTitle()}"></td>
+        </tr>
+        <tr>
+            <th>Genre</th>
+            <td th:text="${selectedBook.getGenre()}"></td>
+        </tr>
+        <tr>
+            <th>Year</th>
+            <td th:text="${selectedBook.getYear()}"></td>
+        </tr>
+    </table>
+
+    <div class="authors-list">
+        <h2>Authors</h2>
+        <ul th:each="author : ${authors}">
+            <li th:text="${author.getName()}"></li>
+        </ul>
+        <a th:href="@{'/author/add-author/{id}' (id=${selectedBook.getId()})}" class="add-author-button">Add Author</a>
+<!--        <form  th:action="@{'/author/remove-authors/{id}' (id=${selectedBook.getId()})}" th:method="DELETE">-->
+<!--            th:href="@{'/author/remove-authors/{id}' (id=${selectedBook.getId()})}"-->
+            <a th:href="@{'/author/remove-authors/{id}' (id=${selectedBook.getId()})}" type="submit" class="btn btn-labeled btn-danger" style="margin-top:10px">
+                <span class="btn-label"><i class="fa fa-trash" style="margin-right: 7px;"></i></span>Delete Authors
+            </a>
+<!--        </form>-->
+
+    </div>
+    <hr>
+    <div class="bookstore-info">
+        <h2>Bookstore Information</h2>
+        <p th:text="${selectedBook.getBookStores().get(0).getName() + ' - ' + selectedBook.getBookStores().get(0).getCity()+ ', ' + selectedBook.getBookStores().get(0).getAddress()}"></p>
+    </div>
+    <hr>
+    <form action="#" th:action="@{'/book-details/book/' + ${selectedBook.getId()}}" method="post" class="form-inline">
+        <div class="form-group">
+            <label for="fromDate">From:</label>
+            <input type="datetime-local" class="form-control" id="fromDate" name="fromDate">
+        </div>
+        <div class="form-group mx-2">
+            <label for="toDate">To:</label>
+            <input type="datetime-local" class="form-control" id="toDate" name="toDate">
+        </div>
+        <button style="margin:10px 0" type="submit" class="button-60" role="button">Filter Reviews</button>
+    </form>
+    <div class="reviews-section">
+<!--        <h2>Reviews</h2>-->
+<!--        <div class="list-group">-->
+
+<!--            <div th:each="review : ${filteredReviews}" class="list-group-item">-->
+<!--                <h5 class="mb-1">Score: <span th:text="${review.score}"></span></h5>-->
+<!--                <small class="float-right"><p>Date and Time: <span th:text="${review.timestamp}"></span></p>-->
+<!--                </small>-->
+<!--                <p class="mb-1" th:utext="${review.description}"></p>-->
+<!--                &lt;!&ndash; Add other review details as needed &ndash;&gt;-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <h2>Reviews</h2>
+        <div class="reviews-section" th:unless="${filtered}">
+            <ul>
+                <li th:each="review : ${reviewsForBook}">
+                    <h5 class="mb-1">Rating: <span th:text="${review.score}"></span></h5>
+                    <small class="float-right"><p>Date and Time: <span th:text="${review.timestamp}"></span></p>
+                    </small>
+                    <p class="mb-1" th:utext="${review.description}"></p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="filtered-reviews-section" th:if="${filtered}">
+            <ul>
+                <li th:each="review : ${filteredReviews}">
+                    <h5 class="mb-1">Rating: <span th:text="${review.score}"></span></h5>
+                    <small class="float-right"><p>Date and Time: <span th:text="${review.timestamp}"></span></p>
+                    </small>
+                    <p class="mb-1" th:utext="${review.description}"></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <a href="/books" class="back-button">Back to Books</a>
+
+</div>
+
+</body>
+</html>
