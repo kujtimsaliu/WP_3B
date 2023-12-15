@@ -21,11 +21,12 @@ public class Book {
 
     private int year;
 
+    private int price;
+
     @OneToMany(fetch = FetchType.EAGER)
     private List<Author> authors;
 
 
-    //TODO changed to list from singe bookstore
     @ManyToMany
     @JoinTable(name = "book-bookStore",
             joinColumns = @JoinColumn(name = "book_id"),
@@ -36,12 +37,13 @@ public class Book {
     @OneToMany(mappedBy = "book",cascade = CascadeType.ALL)
     private List<Review> reviews;
 
-    public Book(String isbn, String title, String genre, int year) {
+    public Book(String isbn, String title, String genre, int year,int price) {
 //        this.id = (long) (Math.random() * 1000);
         this.isbn = isbn;
         this.title = title;
         this.genre = genre;
         this.year = year;
+        this.price=price;
         this.authors = new ArrayList<>();
         bookStores=new ArrayList<>();
         reviews=new ArrayList<>();
