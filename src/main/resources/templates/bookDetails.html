@@ -194,6 +194,15 @@
             <th>Year</th>
             <td th:text="${selectedBook.getYear()}"></td>
         </tr>
+        <tr>
+            <th>Price</th>
+            <td th:text="'$'+${selectedBook.getPrice()} + '.00'"></td>
+        </tr>
+        <tr>
+            <th>Price discounted (20% OFF)</th>
+            <td th:text="'$' + ${selectedBook.getPrice() * discount} + '0' + '\n' + ${timestamp}"></td>
+
+        </tr>
     </table>
 
     <div class="authors-list">

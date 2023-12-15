@@ -47,6 +47,17 @@ public class BookController {
         return "listBooks";
     }
 
+    @GetMapping("books/buy/{id}")
+    public String buyBook(@PathVariable Long id, Model model) {
+        List<Book> books = bookService.listBooks();
+        List<BookStore> bookStores = bookStoreService.findAll();
+
+        Book book = bookService.findBookById(id).orElseThrow(() -> new BookNotFound(id));
+        model.addAttribute("books", books);
+        model.addAttribute("book-store", bookStores);
+        return "listBooks";
+    }
+
 
 
     @DeleteMapping("/delete/{id}")
@@ -85,12 +96,13 @@ public class BookController {
                            @RequestParam String isbn,
                            @RequestParam String genre,
                            @RequestParam int year,
+                            @RequestParam int price,
 //                           @RequestParam Long authorId,
                            @RequestParam Long bookstoreId){
         if (id != null)
-            this.bookService.edit(id, isbn,title, genre, year, bookstoreId);
+            this.bookService.edit(id, isbn,title, genre, year,price, bookstoreId);
         else
-            this.bookService.save(isbn,title, genre, year, bookstoreId);
+            this.bookService.save(isbn,title, genre, year,price, bookstoreId);
         return "redirect:/books";
     }
 }

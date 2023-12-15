@@ -86,6 +86,7 @@
                             <th scope="col">Author/s</th>
                             <th scope="col">Genre</th>
                             <th scope="col">Year</th>
+                            <th scope="col">Price</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
                         </tr>
@@ -115,10 +116,15 @@
                                 </td>
                                 <td th:text="${b.getGenre()}"></td>
                                 <td th:text="${b.getYear()}"></td>
+
+<!--                                //TODO change the price to a var-->
+                                <td th:text="'$'+${b.getPrice()}+'.00'"></td>
                                 <td>
                                     <a th:href="@{'/reviews/add-review/' + ${b.getId()}}" class="star-rating">☆☆☆☆☆</a>
                                 </td>
                                 <td class="text-right">
+                                    <a class="btn btn-success" th:href="@{'/books/buy/{id}' (id=${b.getId()})}" style="margin-bottom: 7px;"><i class="fa">Buy</i></a>
+
                                     <form th:action="@{'/books/delete/{id}' (id=${b.getId()})}"
                                           th:method="delete">
 <!--                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash">Delete</i></button>-->
