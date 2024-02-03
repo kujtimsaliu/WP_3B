@@ -1,23 +1,30 @@
 package mk.finki.ukim.wp.lab.service.impl;
 
 import jakarta.transaction.Transactional;
+import mk.finki.ukim.wp.lab.model.Book;
 import mk.finki.ukim.wp.lab.model.BookStore;
 import mk.finki.ukim.wp.lab.model.exceptions.BookStoreNotFoundException;
 import mk.finki.ukim.wp.lab.repository.impl.InBookStoreRepository;
+import mk.finki.ukim.wp.lab.repository.jpa.BookRepository;
 import mk.finki.ukim.wp.lab.repository.jpa.BookStoreRepository;
 import mk.finki.ukim.wp.lab.service.BookStoreService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static mk.finki.ukim.wp.lab.bootstrap.Dataholder.books;
 
 @Service
 public class BookStoreServiceImpl implements BookStoreService {
 
     private final BookStoreRepository bookStoreRepository;
+    private final BookRepository bookRepository;
 
-    public BookStoreServiceImpl(BookStoreRepository bookStoreRepository) {
+    public BookStoreServiceImpl(BookStoreRepository bookStoreRepository, BookRepository bookRepository) {
         this.bookStoreRepository = bookStoreRepository;
+        this.bookRepository = bookRepository;
     }
 
     @Override
@@ -55,8 +62,8 @@ public class BookStoreServiceImpl implements BookStoreService {
         if(bookStore!=null){
             bookStoreRepository.delete(bookStore);
         }
-
     }
+
 
     @Override
     public void edit(Long id, String name, String city, String address) {

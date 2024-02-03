@@ -13,6 +13,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Garamond:wght@400;700&display=swap" rel="stylesheet">
+
 
     <!-- Bootstrap 5 CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
@@ -20,22 +22,23 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 <style>
-    .star-rating {
+
+    main .star-rating {
         display: inline-block;
         font-size: 24px;
         color: #cbb01b; /* Gold color for stars */
         text-decoration: none;
     }
 
-    .star-rating:hover {
+    main .star-rating:hover {
         color: #ffcc00; /* Change color on hover */
         text-decoration: none;
     }
-    li {
+    main li {
         margin-left: -40px;
         list-style: none;
     }
-    .btn-label {
+    main .btn-label {
         position: relative;
         left: -12px;
         display: inline-block;
@@ -43,32 +46,88 @@
         background: rgba(0, 0, 0, 0.15);
         border-radius: 3px 0 0 3px;
     }
-    table {
+    main table {
         width: 100%;
         border-collapse: collapse;
     }
-    td {
+    main td {
         /*text-align: center;*/
         vertical-align: center;
     }
-    .btn-labeled {
+    main .btn-labeled {
         padding-top: 0;
         padding-bottom: 0;
     }
 
-    .btn {
+    main .btn {
         /*margin-bottom: 10px;*/
     }
 </style>
 <body>
-    <header class="mb-5">
-        <h1>Welcome to My Book Store</h1>
-    </header>
-    <main>
+<header xmlns:th="http://www.thymeleaf.org">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Books</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <header class="mb-5">
-            <h1>Books:</h1>
-        </header>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+                <ul class="navbar-nav m-auto">
+                    <li class="nav-item m-auto">
+                        <a class="nav-link active" href="/books">Books</a>
+                    </li>
+                    <li class="nav-item m-auto">
+                        <a class="nav-link active" href="/bookstore">Book Stores</a>
+                    </li>
+                </ul>
+
+
+                <form class="form-inline my-2 my-lg-0">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" aria-label="Small"
+                               aria-describedby="inputGroup-sizing-sm"
+                               placeholder="Search...">
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-secondary btn-number">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-success btn-sm ml-3" href="/shopping-cart">
+                            <i class="fa fa-shopping-cart"></i> Cart
+                        </a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a href="#" class="btn btn-light btn-sm ml-3" sec:authentication="name">
+                        </a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="btn btn-light btn-sm ml-3" href="/logout">
+                            <i class="fa-solid fa-right-from-bracket"></i> Logout
+                        </a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAnonymous()">
+                        <a class="btn btn-light btn-sm ml-3" href="/login">
+                            <i class="fa-solid fa-right-to-bracket"></i> Login
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+
 
 
 

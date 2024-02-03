@@ -21,7 +21,7 @@ public class Book {
 
     private int year;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Author> authors;
 
 

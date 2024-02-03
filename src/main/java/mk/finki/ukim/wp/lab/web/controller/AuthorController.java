@@ -2,6 +2,7 @@ package mk.finki.ukim.wp.lab.web.controller;
 
 import mk.finki.ukim.wp.lab.model.Author;
 import mk.finki.ukim.wp.lab.model.Book;
+import mk.finki.ukim.wp.lab.model.exceptions.BookNotFound;
 import mk.finki.ukim.wp.lab.service.AuthorService;
 import mk.finki.ukim.wp.lab.service.BookService;
 import mk.finki.ukim.wp.lab.service.BookStoreService;
@@ -65,15 +66,17 @@ public class AuthorController {
 
     @GetMapping("/remove-authors/{id}")
     public String removeAuthors(@PathVariable Long id) {
-        Optional<Book> optionalBook = bookService.findBookById(id);
+//        Optional<Book> optionalBook = bookService.findBookById(id);
+//        Book book1 = bookService.findBookById(id).orElseThrow(() -> new BookNotFound(id));
 
-        if (optionalBook.isPresent()) {
-            Book book = optionalBook.get();
-            book.getAuthors().clear();
-            bookService.save(book);  // Assuming you have a method to save the book changes
-        }
+//        if (optionalBook.isPresent()) {
+//            Book book = optionalBook.get();
+//            book.getAuthors().clear();
+//            bookService.save(book);  // Assuming you have a method to save the book changes
+//        }
+        bookService.removeAuthors(id);
 
-        return "redirect:/book-details/book/" + optionalBook.get().getId();
+        return "redirect:/book-details/book/" + id;
     }
 
     @GetMapping("/create-author/{id}")

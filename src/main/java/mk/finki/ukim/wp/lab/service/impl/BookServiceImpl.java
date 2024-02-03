@@ -7,10 +7,6 @@ import mk.finki.ukim.wp.lab.model.BookStore;
 import mk.finki.ukim.wp.lab.model.exceptions.BookNotFound;
 import mk.finki.ukim.wp.lab.model.exceptions.BookNotFoundException;
 import mk.finki.ukim.wp.lab.model.exceptions.BookStoreNotFoundException;
-import mk.finki.ukim.wp.lab.model.exceptions.InvalidAuthorIdException;
-import mk.finki.ukim.wp.lab.repository.impl.InBookStoreRepository;
-import mk.finki.ukim.wp.lab.repository.impl.InMemoryAuthorRepository;
-import mk.finki.ukim.wp.lab.repository.impl.InMemoryBookRepository;
 import mk.finki.ukim.wp.lab.repository.jpa.AuthorRepository;
 import mk.finki.ukim.wp.lab.repository.jpa.BookRepository;
 import mk.finki.ukim.wp.lab.repository.jpa.BookStoreRepository;
@@ -130,6 +126,14 @@ public class BookServiceImpl implements BookService {
         Book savedBook = this.bookRepository.save(new Book(book.getIsbn(), book.getTitle(), book.getGenre(), book.getYear()));
 //        savedBook.setBookStore(book.getBookStores().get(0));
         return Optional.of(savedBook);
+    }
+
+    @Override
+    public Book removeAuthors(Long id) {
+        Book book = bookRepository.findById(id).orElseThrow(() -> new BookNotFound(id));
+        book.getAuthors().clear();
+        bookRepository.save(book);
+        return book;
     }
 
 }

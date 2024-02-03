@@ -2,7 +2,6 @@ package mk.finki.ukim.wp.lab.service;
 
 import mk.finki.ukim.wp.lab.model.Author;
 import mk.finki.ukim.wp.lab.model.Book;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,4 +23,5 @@ public interface BookService {
 
     Optional<Book>save(Book book);
 
+    Book removeAuthors(Long id);
 }

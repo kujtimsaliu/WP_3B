@@ -50,6 +50,8 @@ public class BookStoreController {
     @DeleteMapping("/delete/{id}")
     public String deleteBook(@PathVariable Long id) {
         this.bookStoreService.deleteBookStore(id);
+
+
         return "redirect:/bookstore";
     }
 

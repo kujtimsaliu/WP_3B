@@ -8,6 +8,7 @@ import mk.finki.ukim.wp.lab.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -39,6 +40,7 @@ public class ReviewServiceImpl implements ReviewService {
     public List<Review> findReviewsByBook(Book book) {
        return reviewRepository.findByBook(book);
     }
+
 
     public List<Review> findReviewsInTimeInterval(LocalDateTime from, LocalDateTime to) {
         return reviewRepository.findByTimestampBetween(from, to);
