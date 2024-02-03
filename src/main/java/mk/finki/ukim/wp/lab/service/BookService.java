@@ -14,11 +14,12 @@ public interface BookService {
     public List<Book>findByKeyword(String keyword);
     void removeBookById(Long id);
 
-    Optional<Book> edit(Long id,String isbn,String title,String  genre,int year,Long bookstoreId);
+    Optional<Book> edit(Long id,String isbn,String title,String  genre,int year,int price,Long bookstoreId);
     void save(String title,
                     String isbn,
                     String genre,
                     int year,
+                    int price,
                     Long bookstoreId);
 
     Optional<Book>save(Book book);

@@ -21,7 +21,7 @@ public class BookStore {
 
     private String address;
 
-    @ManyToMany(mappedBy = "bookStores")
+    @ManyToMany(mappedBy = "bookStores" )
     private List<Book> books;
 
     public BookStore(String name, String city, String address) {

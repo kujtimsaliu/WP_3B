@@ -43,7 +43,7 @@ public class InMemoryBookRepository {
         return Dataholder.books.stream().filter(k -> k.getTitle().contains(keyword)).collect(Collectors.toList());
     }
 
-    public void addBook(String title, String isbn, String genre, int year, BookStore bookStore) {
+    public void addBook(String title, String isbn, String genre, int year, BookStore bookStore,int price) {
         List<Author> as=new ArrayList<>();
 //        as.add(author);
 
@@ -57,7 +57,7 @@ public class InMemoryBookRepository {
             return;
         }
 
-        Book b = new Book(isbn, title, genre, year);
+        Book b = new Book(isbn, title, genre, year,price);
         b.setBookStore(bookStore);
         Dataholder.books.add(b);
     }

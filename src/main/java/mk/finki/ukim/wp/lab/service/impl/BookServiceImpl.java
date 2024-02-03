@@ -88,7 +88,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Optional<Book> edit(Long id, String isbn, String title, String genre, int year, Long bookstoreId) {
+    public Optional<Book> edit(Long id, String isbn, String title, String genre, int year,int price, Long bookstoreId) {
 
         Book book = this.bookRepository.findById(id).orElseThrow(() -> new BookNotFound(id));
 
@@ -96,6 +96,7 @@ public class BookServiceImpl implements BookService {
         book.setTitle(title);
         book.setGenre(genre);
         book.setYear(year);
+        book.setPrice(price);
 
 
         BookStore bookStore = bookStoreRepository.findById(bookstoreId).orElseThrow(() -> new BookStoreNotFoundException(bookstoreId));
@@ -107,12 +108,12 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @org.springframework.transaction.annotation.Transactional
-    public void save(String title, String isbn, String genre, int year, Long bookstoreId) {
+    public void save(String title, String isbn, String genre, int year,int price, Long bookstoreId) {
         BookStore bookStore = bookStoreRepository.findById(bookstoreId)
                 .orElseThrow(() -> new BookNotFound(bookstoreId));
 //        Author author = authorRepository.findById(authorId).orElseThrow(() -> new InvalidAuthorIdException());
 
-        Book book = new Book(title,isbn,genre,year);
+        Book book = new Book(title,isbn,genre,year,price);
 //        book.setBookStore(bookStore);
         this.bookRepository.save(book);
         bookStore.addBook(book);
@@ -123,7 +124,7 @@ public class BookServiceImpl implements BookService {
         bookStoreRepository.findById(book.getBookStores().get(0).getId())
                 .orElseThrow(()->new BookStoreNotFoundException(book.getBookStores().get(0).getId()));
         this.bookRepository.deleteById(book.getId());
-        Book savedBook = this.bookRepository.save(new Book(book.getIsbn(), book.getTitle(), book.getGenre(), book.getYear()));
+        Book savedBook = this.bookRepository.save(new Book(book.getIsbn(), book.getTitle(), book.getGenre(), book.getYear(),book.getPrice()));
 //        savedBook.setBookStore(book.getBookStores().get(0));
         return Optional.of(savedBook);
     }

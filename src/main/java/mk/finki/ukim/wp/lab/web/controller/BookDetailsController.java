@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -38,7 +40,14 @@ public class BookDetailsController {
         Book bookById = bookService.findBookById(id).orElseThrow(() -> new BookNotFound(id));
         List<Review> reviewsByBook = reviewService.findReviewsByBook(bookById);
         List<Author> authors = bookById.getAuthors();
+        String newLine="\n";
+        model.addAttribute("\n",newLine);
 
+        double discount = 0.7;
+
+        model.addAttribute("discount", discount);
+
+        model.addAttribute("timestamp", Timestamp.valueOf(LocalDateTime.now()));
         model.addAttribute("reviewsForBook", reviewsByBook);
         model.addAttribute("selectedBook", bookById);
         model.addAttribute("authors", authors);
